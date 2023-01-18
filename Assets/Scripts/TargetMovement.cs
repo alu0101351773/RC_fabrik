@@ -12,11 +12,12 @@ public class TargetMovement : MonoBehaviour
         speed = 3;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         MoveTarget();
     }
+
 
     void MoveTarget()
     {

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Código basado en el vídeo de Guis Caminiti
+// https://youtu.be/_S2bNLpji2s
 public class FabrikSolver : MonoBehaviour
 {
     [SerializeField]
@@ -19,6 +21,7 @@ public class FabrikSolver : MonoBehaviour
     {
         SetupBones();
     }
+
 
     void SetupBones()
     {
@@ -42,7 +45,7 @@ public class FabrikSolver : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         SolveIK();
