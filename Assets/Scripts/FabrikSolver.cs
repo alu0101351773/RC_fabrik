@@ -5,7 +5,7 @@ using UnityEngine;
 public class FabrikSolver : MonoBehaviour
 {
     [SerializeField]
-    Transform[] bones;
+    public List<Transform> bones;
     float[] bonesLengths;
 
     [SerializeField]
@@ -15,13 +15,23 @@ public class FabrikSolver : MonoBehaviour
     Transform targetPosition;
 
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
-        bonesLengths = new float[bones.Length];
+        SetupBones();
+    }
 
-        for (int i = 0; i < bones.Length; i++)
+    void SetupBones()
+    {
+        foreach (GameObject bone in GameObject.FindGameObjectsWithTag("Bone"))
         {
-            if (i < bones.Length - 1)
+            bones.Add(bone.GetComponent<Transform>());
+        }
+
+        bonesLengths = new float[bones.Count];
+
+        for (int i = 0; i < bones.Count; i++)
+        {
+            if (i < bones.Count - 1)
             {
                 bonesLengths[i] = (bones[i + 1].position - bones[i].position).magnitude;
             }
@@ -41,10 +51,10 @@ public class FabrikSolver : MonoBehaviour
 
     void SolveIK()
     {
-        Vector3[] finalBonesPositions = new Vector3[bones.Length];
+        Vector3[] finalBonesPositions = new Vector3[bones.Count];
 
         // Establecemos la posición inicial de los huesos
-        for (int i = 0; i < bones.Length; i++)
+        for (int i = 0; i < bones.Count; i++)
         {
             finalBonesPositions[i] = bones[i].position;
         }
@@ -56,11 +66,11 @@ public class FabrikSolver : MonoBehaviour
         }
 
         // Aplicamos los resultados a cada hueso
-        for (int i = 0; i < bones.Length; i++)
+        for (int i = 0; i < bones.Count; i++)
         {
             bones[i].position = finalBonesPositions[i];
 
-            if (i != bones.Length - 1)
+            if (i != bones.Count - 1)
             {
                 bones[i].rotation = Quaternion.LookRotation(finalBonesPositions[i + 1] - bones[i].position);
             }

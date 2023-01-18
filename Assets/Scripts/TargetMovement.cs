@@ -9,7 +9,6 @@ public class TargetMovement : MonoBehaviour
 
     void Start()
     {
-        transform.position = new Vector3(0, 3, -2);
         speed = 3;
     }
 
@@ -27,7 +26,7 @@ public class TargetMovement : MonoBehaviour
             + (Input.GetAxis("Vertical") * Time.deltaTime * speed);
 
         transform.position = new Vector3(
-            Mathf.Clamp(new_x, -2.5f, 2.5f),
+            Mathf.Clamp(new_x, -4.5f, 4.5f),
             Mathf.Clamp(new_y, 0f, 3.5f),
             transform.position.z
         ); 
